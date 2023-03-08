@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Tree{ 
 
     Node overallRoot;
+    
     private String fName;
     private String lName;
     private String email;
@@ -13,6 +14,7 @@ public class Tree{
     private int zip;
     private String phone;
 
+    // asks for traversal order
     public void print(Node temp, Scanner input){
         
         System.out.println();
@@ -24,6 +26,7 @@ public class Tree{
         print(temp, input.next());
     }
     
+    // Prints out last names of employees in determined order
     private void print(Node temp, String ans){
         
         // inorder
@@ -54,12 +57,14 @@ public class Tree{
         }
     }
     
+    // Passes on last name
     public void mod(Node root, Scanner input, String ans){
 
         lName = ans;
         mod(root, input);
         }
     
+    // modifies data value for employee
     private void mod(Node root, Scanner input){
         
         if(root == null){
@@ -144,6 +149,7 @@ public class Tree{
         }
     }
 
+    // Stores info about added employee
     public void add(Scanner input){
         
         System.out.println();
@@ -168,6 +174,7 @@ public class Tree{
         overallRoot = add(overallRoot);
     }
 
+    // add info to employee node database
     private Node add(Node root){
         
         if(root == null){
@@ -189,6 +196,7 @@ public class Tree{
         return root;
     }
 
+    // Asks for employee key name
     public void delete(Node root, Scanner input){
 
         System.out.println();
@@ -199,6 +207,7 @@ public class Tree{
         overallRoot = delete(root);
     }
 
+    // Removes employee from database
     private Node delete(Node root){
         
         if(root == null){
@@ -206,16 +215,19 @@ public class Tree{
             return null;
         }
         
+        // Left branch
         else if(lName.compareToIgnoreCase(root.lName) < 0){
         
             root.left = delete(root.left);
         }
         
+        // Right branch
         else if(lName.compareToIgnoreCase(root.lName) > 0){
         
             root.right = delete(root.right);
         }
         
+        // when value is found
         else{
         
             if(root.right == null){
@@ -230,7 +242,7 @@ public class Tree{
         
             else{
         
-                root.lName = getMin(root.right);
+                root.lName = getMin(root.right); // changes data to smallest value after node disconected
                 root.right = delete(root.right);
             }
         }
@@ -238,6 +250,7 @@ public class Tree{
         return root;
     }
 
+    // checks for empty node
     public String getMin(){
         
         if(overallRoot == null){
@@ -248,6 +261,7 @@ public class Tree{
         return getMin(overallRoot);
     }
     
+    // Returns smalles value on lefts side of branch
     private String getMin(Node root){
     
         if(root.left == null){
@@ -260,7 +274,8 @@ public class Tree{
             return getMin(root.left);
         }
     }
-
+    
+    // Returns total number of employees in database
     public int getTotal(Node temp){
         
         if(temp != null){
@@ -275,6 +290,7 @@ public class Tree{
 
     }
 
+    // Establishes correct employee
     public void lookUp(Node root, Scanner input){
         
         System.out.println();
@@ -283,6 +299,8 @@ public class Tree{
         lName = input.next();
         lookUp(root);
     }
+
+    // Displays full Employee information
     public void lookUp(Node root){
 
         if(root == null){
